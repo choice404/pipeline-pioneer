@@ -1,13 +1,141 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Charity Water Game</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Welcome to the Charity Water Game Prototype</h1>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pipeline Pioneer — charity: water</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- ============================== -->
+    <!-- START SCREEN                   -->
+    <!-- ============================== -->
+    <div id="screen-start" class="screen active">
+      <div class="start-container">
+        <img
+          src="img/water-can-transparent.png"
+          alt="charity: water jerry can"
+          class="start-logo-img"
+        />
+        <h1 class="start-title">PIPELINE PIONEER</h1>
+        <p class="start-subtitle">Dig deep. Lay pipes. Reach clean water.</p>
+        <button id="btn-start" class="btn btn-primary">START DIGGING</button>
+        <div class="start-secondary">
+          <button class="btn btn-ghost" disabled>Settings</button>
+          <button class="btn btn-ghost" disabled>Leaderboard</button>
+        </div>
+        <img
+          src="img/cw_logo_horizontal.png"
+          alt="charity: water"
+          class="start-brand"
+        />
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- GAME SCREEN                    -->
+    <!-- ============================== -->
+    <div id="screen-game" class="screen">
+      <!-- HUD Top -->
+      <div id="hud-top">
+        <span id="hud-pipes">Pipes Left: 0</span>
+        <span id="hud-level">Level 1</span>
+        <span id="hud-coins">Coins: 0</span>
+      </div>
+
+      <!-- Game Board -->
+      <div id="board"></div>
+
+      <!-- HUD Bottom / Toolbar -->
+      <div id="hud-bottom">
+        <button id="btn-reset" class="hud-btn" title="Reset Route">
+          ↺ Reset
+        </button>
+        <span id="hud-drill" class="hud-tool" title="Drill count">
+          🔨 <span id="drill-count">0</span>
+        </span>
+        <button id="btn-shop" class="hud-btn" title="Open Shop">🛒 Shop</button>
+      </div>
+
+    </div>
+
+    <!-- ============================== -->
+    <!-- SHOP OVERLAY                   -->
+    <!-- ============================== -->
+    <div id="screen-shop" class="screen overlay">
+      <div class="modal">
+        <h2>🛒 Pipe Shop</h2>
+        <div class="shop-items">
+          <div class="shop-card" id="shop-drill">
+            <div class="shop-icon">🔨</div>
+            <div class="shop-name">Drill</div>
+            <div class="shop-desc">Break through one Rock tile</div>
+            <div class="shop-cost">30 coins</div>
+            <button class="btn btn-primary btn-buy" data-item="drill">
+              Buy
+            </button>
+          </div>
+          <div class="shop-card" id="shop-pipes">
+            <div class="shop-icon">🔧</div>
+            <div class="shop-name">+5 Pipes</div>
+            <div class="shop-desc">Extra pipe segments</div>
+            <div class="shop-cost">20 coins</div>
+            <button class="btn btn-primary btn-buy" data-item="pipes">
+              Buy
+            </button>
+          </div>
+        </div>
+        <button id="btn-shop-close" class="btn btn-ghost">✕ Close Shop</button>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- WIN SCREEN                     -->
+    <!-- ============================== -->
+    <div id="screen-win" class="screen overlay">
+      <div class="modal modal-win">
+        <div id="confetti-container"></div>
+        <img
+          src="img/water-can-transparent.png"
+          alt="charity: water jerry can"
+          class="win-can"
+        />
+        <h2 class="win-heading">💧 AQUIFER REACHED!</h2>
+        <p class="win-fact">
+          Access to clean water improves health and education for communities
+          around the world. 663&nbsp;million people still lack access to safe
+          water.
+        </p>
+        <img
+          src="img/cw_logo_horizontal.png"
+          alt="charity: water"
+          class="win-brand"
+        />
+        <div class="win-buttons">
+          <button id="btn-next-level" class="btn btn-primary">
+            Next Level →
+          </button>
+          <button id="btn-replay" class="btn btn-ghost">Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- LOSE SCREEN                    -->
+    <!-- ============================== -->
+    <div id="screen-lose" class="screen overlay">
+      <div class="modal modal-lose">
+        <h2 class="lose-heading">OUT OF PIPES!</h2>
+        <p>You couldn't reach the water this time.</p>
+        <div class="lose-buttons">
+          <button id="btn-restart" class="btn btn-primary">
+            Restart Route
+          </button>
+          <button id="btn-lose-shop" class="btn btn-ghost">Open Shop</button>
+        </div>
+      </div>
+    </div>
+
     <script src="script.js"></script>
-</body>
+  </body>
 </html>
