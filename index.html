@@ -20,15 +20,31 @@
         <h1 class="start-title">PIPELINE PIONEER</h1>
         <p class="start-subtitle">Dig deep. Lay pipes. Reach clean water.</p>
         <button id="btn-start" class="btn btn-primary">START DIGGING</button>
+        <button id="btn-levels" class="btn btn-ghost">Select Level</button>
         <div class="start-secondary">
-          <button class="btn btn-ghost" disabled>Settings</button>
-          <button class="btn btn-ghost" disabled>Leaderboard</button>
+          <button id="btn-settings-open" class="btn btn-ghost">
+            Settings
+          </button>
+          <button id="btn-leaderboard-open" class="btn btn-ghost">
+            Best Runs
+          </button>
         </div>
         <img
           src="img/cw_logo_horizontal.png"
           alt="charity: water"
           class="start-brand"
         />
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- LEVEL SELECT SCREEN            -->
+    <!-- ============================== -->
+    <div id="screen-levels" class="screen">
+      <div class="levels-container">
+        <h2 class="levels-title">Select Level</h2>
+        <div id="levels-grid"></div>
+        <button id="btn-levels-back" class="btn btn-ghost">← Back</button>
       </div>
     </div>
 
@@ -43,20 +59,29 @@
         <span id="hud-coins">Coins: 0</span>
       </div>
 
-      <!-- Game Board -->
-      <div id="board"></div>
+      <!-- Board Viewport (fixed-height window) -->
+      <div id="board-viewport">
+        <div id="board-scroller">
+          <div id="rig-header"></div>
+          <div id="board"></div>
+        </div>
+      </div>
 
       <!-- HUD Bottom / Toolbar -->
       <div id="hud-bottom">
+        <button id="btn-home" class="hud-btn" title="Back to Home">
+          ← Home
+        </button>
         <button id="btn-reset" class="hud-btn" title="Reset Route">
           ↺ Reset
         </button>
         <span id="hud-drill" class="hud-tool" title="Drill count">
           🔨 <span id="drill-count">0</span>
         </span>
-        <button id="btn-shop" class="hud-btn" title="Open Shop">🛒 Shop</button>
+        <button id="btn-shop" class="hud-btn" title="Open Shop">
+          🛒 Shop
+        </button>
       </div>
-
     </div>
 
     <!-- ============================== -->
@@ -133,6 +158,50 @@
           </button>
           <button id="btn-lose-shop" class="btn btn-ghost">Open Shop</button>
         </div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- SETTINGS OVERLAY               -->
+    <!-- ============================== -->
+    <div id="screen-settings" class="screen overlay">
+      <div class="modal modal-settings">
+        <h2>⚙️ Settings</h2>
+        <div class="settings-list">
+          <div class="settings-row">
+            <span>Player Name</span>
+            <input
+              id="settings-name"
+              type="text"
+              class="settings-input"
+              placeholder="Pioneer"
+              maxlength="16"
+            />
+          </div>
+          <div class="settings-row">
+            <span>Show Move Hints</span>
+            <button id="settings-hints" class="settings-toggle on">ON</button>
+          </div>
+        </div>
+        <button id="btn-reset-progress" class="btn btn-danger">
+          Reset All Progress
+        </button>
+        <button id="btn-settings-close" class="btn btn-ghost">
+          ✕ Close
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- LEADERBOARD OVERLAY            -->
+    <!-- ============================== -->
+    <div id="screen-leaderboard" class="screen overlay">
+      <div class="modal modal-leaderboard">
+        <h2>🏆 Best Runs</h2>
+        <div id="leaderboard-list" class="leaderboard-list"></div>
+        <button id="btn-leaderboard-close" class="btn btn-ghost">
+          ✕ Close
+        </button>
       </div>
     </div>
 
