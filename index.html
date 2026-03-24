@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pipeline Pioneer — charity: water</title>
     <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Nunito:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <!-- ============================== -->
@@ -20,20 +26,29 @@
         <h1 class="start-title">PIPELINE PIONEER</h1>
         <p class="start-subtitle">Dig deep. Lay pipes. Reach clean water.</p>
         <button id="btn-start" class="btn btn-primary">START DIGGING</button>
-        <button id="btn-levels" class="btn btn-ghost">Select Level</button>
+        <div class="start-row">
+          <button id="btn-levels" class="btn btn-ghost">Select Level</button>
+          <button id="btn-endless" class="btn btn-ghost">♾️ Endless</button>
+        </div>
         <div class="start-secondary">
-          <button id="btn-settings-open" class="btn btn-ghost">
-            Settings
-          </button>
+          <button id="btn-settings-open" class="btn btn-ghost">Settings</button>
           <button id="btn-leaderboard-open" class="btn btn-ghost">
             Best Runs
           </button>
         </div>
-        <img
-          src="img/cw_logo_horizontal.png"
-          alt="charity: water"
-          class="start-brand"
-        />
+        <a
+          href="https://www.charitywater.org/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="start-brand-link"
+        >
+          <img
+            src="img/cw_logo_horizontal.png"
+            alt="charity: water"
+            class="start-brand"
+          />
+          <span class="start-brand-cta">Learn more at charitywater.org</span>
+        </a>
       </div>
     </div>
 
@@ -56,7 +71,7 @@
       <div id="hud-top">
         <span id="hud-pipes">Pipes Left: 0</span>
         <span id="hud-level">Level 1</span>
-        <span id="hud-coins">Coins: 0</span>
+        <span id="hud-coins">Cans: 0</span>
       </div>
 
       <!-- Board Viewport (fixed-height window) -->
@@ -64,6 +79,28 @@
         <div id="board-scroller">
           <div id="rig-header"></div>
           <div id="board"></div>
+        </div>
+      </div>
+
+      <!-- Tutorial Overlay (level 1, first time) -->
+      <div id="tutorial-overlay" class="tutorial-overlay hidden">
+        <div class="tutorial-steps">
+          <div class="tutorial-step">
+            <span class="tutorial-icon">👆</span>
+            <span>Click adjacent tiles or use arrow keys to move</span>
+          </div>
+          <div class="tutorial-step">
+            <span class="tutorial-icon">🫗</span>
+            <span
+              >Collect water cans to buy drills and extra pipes in the
+              shop</span
+            >
+          </div>
+          <div class="tutorial-step">
+            <span class="tutorial-icon">💧</span>
+            <span>Reach the blue aquifer at the bottom to win!</span>
+          </div>
+          <p class="tutorial-dismiss">Make your first move to begin</p>
         </div>
       </div>
 
@@ -78,9 +115,7 @@
         <span id="hud-drill" class="hud-tool" title="Drill count">
           🔨 <span id="drill-count">0</span>
         </span>
-        <button id="btn-shop" class="hud-btn" title="Open Shop">
-          🛒 Shop
-        </button>
+        <button id="btn-shop" class="hud-btn" title="Open Shop">🛒 Shop</button>
       </div>
     </div>
 
@@ -95,7 +130,7 @@
             <div class="shop-icon">🔨</div>
             <div class="shop-name">Drill</div>
             <div class="shop-desc">Break through one Rock tile</div>
-            <div class="shop-cost">30 coins</div>
+            <div class="shop-cost">30 cans</div>
             <button class="btn btn-primary btn-buy" data-item="drill">
               Buy
             </button>
@@ -104,7 +139,7 @@
             <div class="shop-icon">🔧</div>
             <div class="shop-name">+5 Pipes</div>
             <div class="shop-desc">Extra pipe segments</div>
-            <div class="shop-cost">20 coins</div>
+            <div class="shop-cost">20 cans</div>
             <button class="btn btn-primary btn-buy" data-item="pipes">
               Buy
             </button>
@@ -121,21 +156,29 @@
       <div class="modal modal-win">
         <div id="confetti-container"></div>
         <img
-          src="img/water-can-transparent.png"
-          alt="charity: water jerry can"
-          class="win-can"
-        />
-        <h2 class="win-heading">💧 AQUIFER REACHED!</h2>
-        <p class="win-fact">
-          Access to clean water improves health and education for communities
-          around the world. 663&nbsp;million people still lack access to safe
-          water.
-        </p>
-        <img
           src="img/cw_logo_horizontal.png"
           alt="charity: water"
-          class="win-brand"
+          class="win-logo"
         />
+        <div class="win-heading-row">
+          <img src="img/16drillRig_tile.png" alt="Drill Rig" class="win-rig" />
+          <h2 class="win-heading">AQUIFER REACHED!</h2>
+        </div>
+        <p id="win-par" class="win-par"></p>
+        <p id="win-fact" class="win-fact"></p>
+        <a
+          href="https://www.charitywater.org/home"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="win-brand-link"
+        >
+          <img
+            src="img/cw_logo_horizontal.png"
+            alt="charity: water"
+            class="win-brand"
+          />
+          <span class="win-brand-cta">charitywater.org</span>
+        </a>
         <div class="win-buttons">
           <button id="btn-next-level" class="btn btn-primary">
             Next Level →
@@ -157,6 +200,31 @@
             Restart Route
           </button>
           <button id="btn-lose-shop" class="btn btn-ghost">Open Shop</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================== -->
+    <!-- ENDLESS GAME OVER OVERLAY      -->
+    <!-- ============================== -->
+    <div id="screen-endless-over" class="screen overlay">
+      <div class="modal modal-endless-over">
+        <h2 class="endless-heading">RUN OVER</h2>
+        <div class="endless-stats">
+          <div class="endless-stat">
+            <span class="endless-stat-label">Floors Cleared</span>
+            <span id="endless-floors" class="endless-stat-value">0</span>
+          </div>
+          <div class="endless-stat">
+            <span class="endless-stat-label">Cans Collected</span>
+            <span id="endless-coins" class="endless-stat-value">0</span>
+          </div>
+        </div>
+        <div class="endless-buttons">
+          <button id="btn-endless-retry" class="btn btn-primary">
+            Try Again
+          </button>
+          <button id="btn-endless-home" class="btn btn-ghost">Home</button>
         </div>
       </div>
     </div>
@@ -186,9 +254,7 @@
         <button id="btn-reset-progress" class="btn btn-danger">
           Reset All Progress
         </button>
-        <button id="btn-settings-close" class="btn btn-ghost">
-          ✕ Close
-        </button>
+        <button id="btn-settings-close" class="btn btn-ghost">✕ Close</button>
       </div>
     </div>
 

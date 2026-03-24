@@ -27,7 +27,12 @@
 }
 
 body {
-  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-family:
+    "Nunito",
+    "Segoe UI",
+    system-ui,
+    -apple-system,
+    sans-serif;
   background: var(--cw-dark-blue);
   color: #fff;
   min-height: 100dvh;
@@ -59,14 +64,16 @@ body {
 
 /* ----- Buttons ----- */
 .btn {
-  font-family: inherit;
+  font-family: "Montserrat", "Nunito", sans-serif;
   font-weight: 700;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
   padding: 0.65em 1.5em;
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.15s;
+  transition:
+    transform 0.1s,
+    box-shadow 0.15s;
 }
 
 .btn:active {
@@ -86,8 +93,8 @@ body {
 
 .btn-ghost {
   background: transparent;
-  color: var(--cw-light-blue);
-  border: 2px solid var(--cw-light-blue);
+  color: #b8d8e8;
+  border: 2px solid #b8d8e8;
 }
 
 .btn-ghost:hover {
@@ -154,15 +161,42 @@ body {
   }
 }
 
-.start-brand {
-  width: clamp(120px, 30vw, 200px);
-  height: auto;
+.start-brand-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.3rem;
   margin-top: 1.5rem;
-  opacity: 0.7;
+  text-decoration: none;
+  transition: opacity 0.15s;
+}
+
+.start-brand-link:hover {
+  opacity: 1;
+}
+
+.start-brand {
+  width: clamp(140px, 35vw, 220px);
+  height: auto;
+  opacity: 0.85;
   filter: brightness(0) invert(1);
 }
 
+.start-brand-cta {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.9rem;
+  color: #fff;
+  font-style: italic;
+}
+
+.start-brand:hover {
+  opacity: 1;
+  filter: brightness(1) invert(0);
+}
+
 .start-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
   font-size: clamp(2rem, 6vw, 3.5rem);
   color: var(--cw-yellow);
   letter-spacing: 0.08em;
@@ -170,9 +204,14 @@ body {
 }
 
 .start-subtitle {
-  color: var(--cw-light-blue);
+  color: #c8e0ec;
   font-size: 1.1rem;
   max-width: 30ch;
+}
+
+.start-row {
+  display: flex;
+  gap: 0.75rem;
 }
 
 .start-secondary {
@@ -208,6 +247,8 @@ body {
 }
 
 .levels-title {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
   font-size: 1.6rem;
   color: var(--cw-yellow);
 }
@@ -234,7 +275,9 @@ body {
   align-items: center;
   justify-content: center;
   gap: 0.25rem;
-  transition: border-color 0.15s, background 0.15s;
+  transition:
+    border-color 0.15s,
+    background 0.15s;
 }
 
 .level-btn:hover {
@@ -269,6 +312,12 @@ body {
   font-size: 0.7em;
 }
 
+.level-par {
+  font-size: 0.55em;
+  font-weight: 400;
+  color: #b8d8e8;
+}
+
 /* ============================
    GAME SCREEN
    ============================ */
@@ -290,6 +339,7 @@ body {
 
 /* HUD Top */
 #hud-top {
+  font-family: "Montserrat", sans-serif;
   width: 100%;
   max-width: 420px;
   display: flex;
@@ -447,7 +497,7 @@ body {
 }
 
 .hud-btn {
-  font-family: inherit;
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
   font-size: 0.85rem;
   background: var(--cw-aquifer-blue);
@@ -517,6 +567,11 @@ body {
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
+.modal h2 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+}
+
 .shop-items {
   display: flex;
   flex-wrap: wrap;
@@ -534,7 +589,9 @@ body {
   flex-direction: column;
   align-items: center;
   gap: 0.3rem;
-  transition: border-color 0.2s, transform 0.2s;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
 }
 
 .shop-card:hover {
@@ -551,7 +608,7 @@ body {
 
 .shop-desc {
   font-size: 0.75rem;
-  color: var(--cw-light-blue);
+  color: #b8d8e8;
 }
 
 .shop-cost {
@@ -607,31 +664,74 @@ body {
   overflow: hidden;
 }
 
-.win-can {
-  width: 60px;
+.win-logo {
+  width: 250px;
   height: auto;
   position: relative;
   z-index: 1;
-  filter: drop-shadow(0 0 16px rgba(63, 169, 245, 0.6));
+  opacity: 1;
+  align-self: center;
+}
+
+.win-heading-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+}
+
+.win-rig {
+  width: 36px;
+  height: 36px;
+  image-rendering: pixelated;
+  filter: drop-shadow(0 0 6px rgba(255, 201, 7, 0.5));
 }
 
 .win-heading {
-  font-size: 1.8rem;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 800;
+  font-size: 1.6rem;
   color: var(--cw-aquifer-blue);
 }
 
 .win-fact {
+  font-family: Georgia, "Times New Roman", serif;
   font-size: 0.9rem;
-  color: var(--cw-light-blue);
-  line-height: 1.5;
+  font-style: italic;
+  color: #fff;
+  line-height: 1.6;
+}
+
+.win-brand-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  text-decoration: none;
+  align-self: center;
+  transition: opacity 0.15s;
+}
+
+.win-brand-link:hover {
+  opacity: 1;
 }
 
 .win-brand {
-  width: 140px;
+  width: 130px;
   height: auto;
-  opacity: 0.6;
-  align-self: center;
+  opacity: 0.7;
   filter: brightness(0) invert(1);
+}
+
+.win-brand:hover {
+  opacity: 1;
+}
+
+.win-brand-cta {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 0.8rem;
+  color: #fff;
+  font-style: italic;
 }
 
 .win-buttons {
@@ -731,12 +831,12 @@ body {
   font-weight: 700;
   font-size: 0.8rem;
   padding: 0.35em 1em;
-  border: 2px solid var(--cw-light-blue);
+  border: 2px solid #b8d8e8;
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.15s;
   background: transparent;
-  color: var(--cw-light-blue);
+  color: #b8d8e8;
 }
 
 .settings-toggle.on {
@@ -750,7 +850,9 @@ body {
    ============================ */
 .modal-leaderboard {
   max-height: 80vh;
-  overflow-y: auto;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .leaderboard-list {
@@ -758,6 +860,11 @@ body {
   flex-direction: column;
   gap: 0.5rem;
   text-align: left;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 0;
+  max-height: 50vh;
+  padding-right: 0.25rem;
 }
 
 .lb-row {
@@ -772,7 +879,7 @@ body {
 
 .lb-row.no-data {
   justify-content: center;
-  color: var(--cw-light-blue);
+  color: #b8d8e8;
   font-style: italic;
 }
 
@@ -782,12 +889,132 @@ body {
 
 .lb-stats {
   font-size: 0.8rem;
-  color: var(--cw-light-blue);
+  color: #b8d8e8;
   text-align: right;
 }
 
 .lb-stats span {
   display: block;
+}
+
+/* ============================
+   TUTORIAL OVERLAY
+   ============================ */
+.tutorial-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 51, 102, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.tutorial-overlay.hidden {
+  display: none;
+}
+
+.tutorial-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.2rem;
+  max-width: 300px;
+  text-align: left;
+}
+
+.tutorial-step {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.9rem;
+  color: #fff;
+  line-height: 1.4;
+}
+
+.tutorial-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.tutorial-dismiss {
+  text-align: center;
+  color: var(--cw-yellow);
+  font-size: 0.85rem;
+  font-weight: 700;
+  animation: pulse-text 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes pulse-text {
+  from {
+    opacity: 0.6;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================
+   WIN PAR DISPLAY
+   ============================ */
+.win-par {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--cw-yellow);
+}
+
+.win-par.under-par {
+  color: #4fcb53;
+}
+
+.win-par.over-par {
+  color: #b8d8e8;
+}
+
+/* ============================
+   ENDLESS GAME OVER
+   ============================ */
+.modal-endless-over {
+  border-color: var(--cw-yellow);
+}
+
+.endless-heading {
+  font-size: 1.6rem;
+  color: var(--cw-yellow);
+}
+
+.endless-stats {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.endless-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.endless-stat-label {
+  font-size: 0.75rem;
+  color: #b8d8e8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.endless-stat-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--cw-yellow);
+}
+
+.endless-buttons {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: center;
 }
 
 /* ============================

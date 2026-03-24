@@ -11,108 +11,45 @@ const SHOP_PRICES = {
   pipes: 20,
 };
 
-// ----- Level Data -----
-// Maps can be any number of rows. Row count is derived from array length.
-const LEVEL_MAPS = [
-  // Level 1 — Tutorial (12 rows, gentle intro)
-  [
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["D", "C", "D", "R", "D", "C", "D"],
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["D", "R", "D", "C", "D", "R", "D"],
-    ["D", "D", "B", "D", "B", "D", "D"],
-    ["C", "D", "D", "D", "D", "D", "C"],
-    ["D", "D", "R", "D", "R", "D", "D"],
-    ["D", "C", "D", "D", "D", "C", "D"],
-    ["D", "D", "D", "R", "D", "D", "D"],
-    ["D", "R", "D", "D", "D", "R", "D"],
-    ["D", "D", "C", "D", "C", "D", "D"],
-    ["A", "A", "A", "A", "A", "A", "A"],
-  ],
-  // Level 2 — Narrow Passage (12 rows)
-  [
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["B", "D", "R", "C", "R", "D", "B"],
-    ["D", "D", "B", "D", "B", "D", "D"],
-    ["D", "R", "D", "D", "D", "R", "D"],
-    ["C", "B", "D", "R", "D", "B", "C"],
-    ["D", "D", "D", "B", "D", "D", "D"],
-    ["D", "R", "C", "D", "C", "R", "D"],
-    ["B", "D", "D", "R", "D", "D", "B"],
-    ["D", "D", "R", "D", "R", "D", "D"],
-    ["D", "B", "C", "D", "C", "B", "D"],
-    ["D", "D", "D", "R", "D", "D", "D"],
-    ["A", "A", "A", "A", "A", "A", "A"],
-  ],
-  // Level 3 — The Maze (16 rows, longer dig)
-  [
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["D", "R", "B", "D", "B", "R", "D"],
-    ["D", "D", "D", "C", "D", "D", "D"],
-    ["B", "D", "R", "B", "R", "D", "B"],
-    ["D", "C", "D", "D", "D", "C", "D"],
-    ["D", "B", "D", "R", "D", "B", "D"],
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["R", "D", "B", "C", "B", "D", "R"],
-    ["D", "D", "D", "B", "D", "D", "D"],
-    ["D", "R", "C", "D", "C", "R", "D"],
-    ["B", "D", "D", "R", "D", "D", "B"],
-    ["D", "D", "R", "D", "R", "D", "D"],
-    ["D", "C", "B", "D", "B", "C", "D"],
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["D", "R", "D", "C", "D", "R", "D"],
-    ["A", "A", "A", "A", "A", "A", "A"],
-  ],
-  // Level 4 — Bedrock Canyon (18 rows, off-center start)
-  [
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["D", "B", "D", "R", "D", "C", "D"],
-    ["D", "D", "B", "D", "D", "D", "D"],
-    ["C", "D", "D", "B", "D", "R", "D"],
-    ["D", "R", "D", "D", "B", "D", "D"],
-    ["D", "B", "C", "D", "D", "D", "B"],
-    ["D", "D", "D", "R", "D", "C", "D"],
-    ["B", "D", "B", "D", "D", "B", "D"],
-    ["D", "C", "D", "D", "R", "D", "D"],
-    ["D", "D", "R", "B", "D", "D", "C"],
-    ["D", "B", "D", "D", "D", "B", "D"],
-    ["C", "D", "D", "R", "D", "D", "D"],
-    ["D", "D", "B", "D", "B", "D", "R"],
-    ["D", "R", "D", "C", "D", "D", "D"],
-    ["B", "D", "D", "D", "R", "D", "B"],
-    ["D", "C", "D", "B", "D", "C", "D"],
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["A", "A", "A", "A", "A", "A", "A"],
-  ],
-  // Level 5 — Deep Dive (20 rows, tight on pipes)
-  [
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["B", "D", "R", "D", "R", "D", "B"],
-    ["D", "C", "B", "D", "B", "C", "D"],
-    ["D", "D", "D", "R", "D", "D", "D"],
-    ["R", "B", "D", "D", "D", "B", "R"],
-    ["D", "D", "C", "B", "C", "D", "D"],
-    ["D", "R", "D", "D", "D", "R", "D"],
-    ["B", "D", "D", "R", "D", "D", "B"],
-    ["D", "D", "B", "D", "B", "D", "D"],
-    ["C", "R", "D", "D", "D", "R", "C"],
-    ["D", "B", "D", "R", "D", "B", "D"],
-    ["D", "D", "C", "B", "C", "D", "D"],
-    ["R", "D", "B", "D", "B", "D", "R"],
-    ["D", "D", "D", "C", "D", "D", "D"],
-    ["B", "R", "D", "D", "D", "R", "B"],
-    ["D", "D", "D", "R", "D", "D", "D"],
-    ["D", "C", "B", "D", "B", "C", "D"],
-    ["D", "D", "D", "D", "D", "D", "D"],
-    ["D", "R", "D", "C", "D", "R", "D"],
-    ["A", "A", "A", "A", "A", "A", "A"],
-  ],
+// ----- Level Data (loaded from levels.json) -----
+let LEVEL_MAPS = [];
+let LEVEL_PIPES = [];
+let LEVEL_START_X = [];
+let LEVEL_PAR = [];
+let LEVEL_NAMES = [];
+
+async function loadLevels() {
+  try {
+    const res = await fetch("levels.json");
+    const levels = await res.json();
+    LEVEL_MAPS = levels.map((l) => l.map);
+    LEVEL_PIPES = levels.map((l) => l.pipes);
+    LEVEL_START_X = levels.map((l) => l.startX);
+    LEVEL_PAR = levels.map((l) => l.par);
+    LEVEL_NAMES = levels.map((l) => l.name);
+  } catch (err) {
+    console.error("Failed to load levels.json:", err);
+  }
+}
+
+// ----- Water Facts (charity: water) -----
+const WATER_FACTS = [
+  "663 million people — 1 in 10 — lack access to safe water.",
+  "Women and children spend 200 million hours every day collecting water.",
+  "Every day, more than 800 children under 5 die from diarrhea caused by dirty water.",
+  "Access to clean water can reduce school absenteeism by up to 90%.",
+  "A $1 investment in water and sanitation yields $4–$12 in economic returns.",
+  "Clean water helps communities grow more food and earn more income.",
+  "charity: water has funded over 137,000 water projects in 29 countries.",
+  "The average water project serves about 250 people for decades.",
+  "Safe water reduces the risk of waterborne diseases like cholera and typhoid.",
+  "Girls are most affected by the water crisis — they miss school to collect water.",
+  "In sub-Saharan Africa, people walk an average of 6 km to collect water.",
+  "Clean water gives people time back — time for school, work, and family.",
+  "100% of public donations to charity: water go directly to water projects.",
+  "Every water project is tracked with GPS and satellite imagery.",
+  "Clean water improves health, education, and economic opportunity for entire communities.",
 ];
-
-const LEVEL_PIPES = [24, 20, 28, 30, 32];
-
-// Per-level start column (rig position). Player always starts row 0.
-const LEVEL_START_X = [3, 3, 3, 1, 3];
 
 const TILE_EXPAND = {
   D: "dirt",
@@ -124,10 +61,7 @@ const TILE_EXPAND = {
 
 // ----- Pipe Direction Logic (adjacency-based) -----
 function isTilePipe(x, y) {
-  // The rig sits above the board at (startX, -1).
-  // Treat it as a pipe neighbor so the start tile connects upward.
   if (x === state.startX && y === -1) return true;
-
   const rows = state.map.length;
   if (x < 0 || x >= COLS || y < 0 || y >= rows) return false;
   return state.visitedTiles.has(`${x},${y}`);
@@ -168,6 +102,80 @@ function getPipeImage(x, y) {
   return "05verticalPipe_tile.png";
 }
 
+// ----- Procedural Map Generation (Endless Mode) -----
+function generateEndlessMap(floor) {
+  const rows = 10 + Math.min(floor, 10);
+  const map = [];
+
+  // Difficulty scaling
+  const bedrockChance = Math.min(0.12 + floor * 0.015, 0.3);
+  const rockChance = Math.min(0.08 + floor * 0.012, 0.25);
+  const coinChance = Math.max(0.12 - floor * 0.005, 0.06);
+
+  // Generate rows
+  for (let y = 0; y < rows; y++) {
+    const row = [];
+    for (let x = 0; x < COLS; x++) {
+      if (y === rows - 1) {
+        row.push("A"); // Aquifer bottom row
+      } else if (y === 0) {
+        row.push("D"); // First row always open
+      } else {
+        const r = Math.random();
+        if (r < bedrockChance) {
+          row.push("B");
+        } else if (r < bedrockChance + rockChance) {
+          row.push("R");
+        } else if (r < bedrockChance + rockChance + coinChance) {
+          row.push("C");
+        } else {
+          row.push("D");
+        }
+      }
+    }
+    map.push(row);
+  }
+
+  // Ensure solvability: carve a guaranteed path
+  const startX = Math.floor(Math.random() * COLS);
+  map[0][startX] = "D";
+
+  let cx = startX;
+  for (let y = 1; y < rows - 1; y++) {
+    // Randomly move left, right, or straight down
+    const moves = [0]; // always allow straight
+    if (cx > 0) moves.push(-1);
+    if (cx < COLS - 1) moves.push(1);
+    const dx = moves[Math.floor(Math.random() * moves.length)];
+
+    if (dx !== 0) {
+      // Clear horizontal step
+      map[y][cx + dx] = map[y][cx + dx] === "C" ? "C" : "D";
+      cx += dx;
+    }
+    // Clear the current column in this row
+    if (map[y][cx] === "B" || map[y][cx] === "R") {
+      map[y][cx] = "D";
+    }
+  }
+
+  // Sprinkle extra coins along path for early floors
+  if (floor < 5) {
+    let placed = 0;
+    for (let y = 1; y < rows - 1 && placed < 3; y++) {
+      for (let x = 0; x < COLS && placed < 3; x++) {
+        if (map[y][x] === "D" && Math.random() < 0.1) {
+          map[y][x] = "C";
+          placed++;
+        }
+      }
+    }
+  }
+
+  const pipes = Math.max(rows + 4 - Math.floor(floor / 3), rows);
+  return { map, startX, pipes };
+}
+
 // ----- localStorage Persistence -----
 function getDefaultSave() {
   return {
@@ -175,9 +183,9 @@ function getDefaultSave() {
     unlockedLevel: 0,
     completedLevels: [],
     bestRuns: [],
-    totalCoins: 0,
-    inventory: { drill: 0 },
     showHints: true,
+    tutorialSeen: false,
+    endlessBest: { floors: 0, coins: 0 },
   };
 }
 
@@ -196,7 +204,7 @@ function writeSave(save) {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(save));
   } catch {
-    // Storage full or unavailable — silently fail
+    // silently fail
   }
 }
 
@@ -220,6 +228,7 @@ const screens = {
   lose: $("#screen-lose"),
   settings: $("#screen-settings"),
   leaderboard: $("#screen-leaderboard"),
+  endlessOver: $("#screen-endless-over"),
 };
 
 const boardEl = $("#board");
@@ -229,7 +238,12 @@ const hudLevel = $("#hud-level");
 const drillCount = $("#drill-count");
 
 // ----- Game State -----
-let state = createInitialState(0);
+let state = null;
+
+// Game mode: "story" or "endless"
+let gameMode = "story";
+let endlessFloor = 0;
+let endlessTotalCoins = 0;
 
 function createInitialState(levelIndex) {
   const idx = Math.min(levelIndex, LEVEL_MAPS.length - 1);
@@ -242,8 +256,26 @@ function createInitialState(levelIndex) {
     originalMap: deepCopyMap(LEVEL_MAPS[idx]),
     playerPos: { x: startX, y: 0 },
     pipesLeft: LEVEL_PIPES[idx] ?? 20,
-    coins: saveData.totalCoins,
-    inventory: { ...saveData.inventory },
+    coins: 0,
+    inventory: { drill: 0 },
+    visitedTiles: new Set([`${startX},0`]),
+    gameActive: false,
+    pipesUsed: 0,
+    coinsCollected: 0,
+  };
+}
+
+function createEndlessState(floor) {
+  const { map, startX, pipes } = generateEndlessMap(floor);
+  return {
+    levelIndex: -1,
+    startX,
+    map,
+    originalMap: deepCopyMap(map),
+    playerPos: { x: startX, y: 0 },
+    pipesLeft: pipes,
+    coins: endlessTotalCoins,
+    inventory: { drill: 0 },
     visitedTiles: new Set([`${startX},0`]),
     gameActive: false,
     pipesUsed: 0,
@@ -282,7 +314,7 @@ const TILE_IMAGES = {
   dirt: "01dirt_tile.png",
   rock: "02stone_tile.png",
   bedrock: "03bedrock_tile.png",
-  coin: "04coin_tile.png",
+  coin: "water-can-transparent.png",
   aquifer: "17aquifer_tile.png",
 };
 
@@ -290,7 +322,6 @@ function renderRigHeader() {
   const rigHeader = $("#rig-header");
   rigHeader.innerHTML = "";
 
-  // Create column slots matching the grid
   for (let x = 0; x < COLS; x++) {
     const slot = document.createElement("div");
     slot.className = "rig-slot";
@@ -318,11 +349,9 @@ function render() {
       const key = `${x},${y}`;
       const raw = state.map[y][x];
       const tileType = TILE_EXPAND[raw] ?? raw;
-      const isPlayer =
-        state.playerPos.x === x && state.playerPos.y === y;
+      const isPlayer = state.playerPos.x === x && state.playerPos.y === y;
       const isVisited = state.visitedTiles.has(key);
-      const isPipe =
-        isVisited && !isPlayer && tileType !== "aquifer";
+      const isPipe = isVisited && !isPlayer && tileType !== "aquifer";
 
       cell.className = "tile";
 
@@ -334,7 +363,14 @@ function render() {
         tileImg = TILE_IMAGES[tileType] ?? TILE_IMAGES.dirt;
       }
 
-      cell.style.backgroundImage = `url(img/${tileImg})`;
+      // Water can sits on top of dirt tile
+      if (tileType === "coin" && !isVisited) {
+        cell.style.backgroundImage = `url(img/water-can-transparent.png), url(img/01dirt_tile.png)`;
+        cell.style.backgroundSize = "60%, cover";
+        cell.style.backgroundPosition = "center, center";
+      } else {
+        cell.style.backgroundImage = `url(img/${tileImg})`;
+      }
 
       if (isPlayer) {
         cell.classList.add("tile-current");
@@ -355,8 +391,11 @@ function render() {
   }
 
   hudPipes.textContent = `Pipes Left: ${state.pipesLeft}`;
-  hudCoins.textContent = `Coins: ${state.coins}`;
-  hudLevel.textContent = `Level ${state.levelIndex + 1}`;
+  hudCoins.textContent = `Cans: ${state.coins}`;
+  hudLevel.textContent =
+    gameMode === "endless"
+      ? `Floor ${endlessFloor + 1}`
+      : `Level ${state.levelIndex + 1}`;
   drillCount.textContent = state.inventory.drill;
 
   scrollToPlayer();
@@ -373,21 +412,12 @@ function scrollToPlayer() {
   const viewportH = viewport.clientHeight;
   const rigH = rigHeader ? rigHeader.offsetHeight : 0;
 
-  // Calculate tile height from the rendered board
   const firstTile = boardEl.querySelector(".tile");
   if (!firstTile) return;
-  const tileH = firstTile.offsetHeight + 1; // +gap
+  const tileH = firstTile.offsetHeight + 1;
 
-  // Player's pixel position from top of scroller
   const playerTop = rigH + state.playerPos.y * tileH;
-
-  // We want the player roughly centered, but never scroll above 0
-  const targetScroll = Math.max(
-    0,
-    playerTop - viewportH * 0.4
-  );
-
-  // Don't scroll past the bottom
+  const targetScroll = Math.max(0, playerTop - viewportH * 0.4);
   const scrollerH = scroller.scrollHeight;
   const maxScroll = Math.max(0, scrollerH - viewportH);
   const clampedScroll = Math.min(targetScroll, maxScroll);
@@ -403,7 +433,19 @@ function renderLevelSelect() {
   for (let i = 0; i < LEVEL_MAPS.length; i++) {
     const btn = document.createElement("button");
     btn.className = "level-btn";
-    btn.textContent = i + 1;
+
+    const num = document.createElement("span");
+    num.textContent = i + 1;
+    btn.appendChild(num);
+
+    // Show par under the level number
+    const par = LEVEL_PAR[i];
+    if (par) {
+      const parLabel = document.createElement("span");
+      parLabel.className = "level-par";
+      parLabel.textContent = `Par ${par}`;
+      btn.appendChild(parLabel);
+    }
 
     const isCompleted = saveData.completedLevels[i] === true;
     const isUnlocked = i <= saveData.unlockedLevel;
@@ -430,16 +472,20 @@ function renderLeaderboard() {
   const list = $("#leaderboard-list");
   list.innerHTML = "";
 
-  const hasAnyData = saveData.bestRuns.some((r) => r);
-
-  if (!hasAnyData) {
-    const row = document.createElement("div");
-    row.className = "lb-row no-data";
-    row.textContent = "No runs yet — start digging!";
-    list.appendChild(row);
-    return;
+  // Endless best
+  const eb = saveData.endlessBest;
+  if (eb.floors > 0) {
+    const header = document.createElement("div");
+    header.className = "lb-row";
+    header.innerHTML =
+      `<span class="lb-level">♾️ Endless Best</span>` +
+      `<span class="lb-stats">` +
+      `<span>Floors: ${eb.floors}</span>` +
+      `<span>Cans: ${eb.coins}</span></span>`;
+    list.appendChild(header);
   }
 
+  // Story levels
   for (let i = 0; i < LEVEL_MAPS.length; i++) {
     const run = saveData.bestRuns[i];
     const row = document.createElement("div");
@@ -455,7 +501,7 @@ function renderLeaderboard() {
     if (run) {
       stats.innerHTML =
         `<span>Pipes used: ${run.pipesUsed}</span>` +
-        `<span>Coins: ${run.coinsCollected}</span>`;
+        `<span>Cans: ${run.coinsCollected}</span>`;
     } else {
       stats.innerHTML = "<span>—</span>";
     }
@@ -463,6 +509,11 @@ function renderLeaderboard() {
     row.appendChild(levelLabel);
     row.appendChild(stats);
     list.appendChild(row);
+  }
+
+  if (!eb.floors && !saveData.bestRuns.some((r) => r)) {
+    list.innerHTML =
+      '<div class="lb-row no-data">No runs yet — start digging!</div>';
   }
 }
 
@@ -487,6 +538,9 @@ const DIR = {
 function tryMove(direction) {
   if (!state.gameActive) return;
 
+  // Dismiss tutorial on first move
+  dismissTutorial();
+
   const { dx, dy } = DIR[direction];
   const nx = state.playerPos.x + dx;
   const ny = state.playerPos.y + dy;
@@ -494,6 +548,7 @@ function tryMove(direction) {
   const rows = state.map.length;
   if (nx < 0 || nx >= COLS || ny < 0 || ny >= rows) {
     shakePlayer();
+    sfxBlocked();
     return;
   }
 
@@ -502,6 +557,7 @@ function tryMove(direction) {
 
   if (tileType === "bedrock") {
     shakePlayer();
+    sfxBlocked();
     return;
   }
 
@@ -509,8 +565,10 @@ function tryMove(direction) {
     if (state.inventory.drill > 0) {
       state.inventory.drill -= 1;
       state.map[ny][nx] = "D";
+      sfxRockBreak();
     } else {
       shakePlayer();
+      sfxBlocked();
       return;
     }
   }
@@ -519,6 +577,9 @@ function tryMove(direction) {
     state.coins += 10;
     state.coinsCollected += 10;
     state.map[ny][nx] = "D";
+    sfxCoin();
+  } else {
+    sfxMove();
   }
 
   const key = `${nx},${ny}`;
@@ -562,7 +623,17 @@ function shakePlayer() {
 function handleWin() {
   state.gameActive = false;
 
-  // Update save data
+  if (gameMode === "endless") {
+    // Endless: advance to next floor
+    endlessTotalCoins = state.coins;
+    endlessFloor += 1;
+    state = createEndlessState(endlessFloor);
+    state.gameActive = true;
+    render();
+    return;
+  }
+
+  // Story mode
   const lvl = state.levelIndex;
   saveData.completedLevels[lvl] = true;
 
@@ -570,7 +641,6 @@ function handleWin() {
     saveData.unlockedLevel = Math.min(lvl + 1, LEVEL_MAPS.length - 1);
   }
 
-  // Track best run
   const currentRun = {
     pipesUsed: state.pipesUsed,
     coinsCollected: state.coinsCollected,
@@ -580,16 +650,59 @@ function handleWin() {
     saveData.bestRuns[lvl] = currentRun;
   }
 
-  saveData.totalCoins = state.coins;
-  saveData.inventory = { ...state.inventory };
   writeSave(saveData);
 
+  // Par display
+  const par = LEVEL_PAR[lvl];
+  const parEl = $("#win-par");
+  if (par) {
+    const diff = state.pipesUsed - par;
+    if (diff <= 0) {
+      parEl.textContent = `${state.pipesUsed} pipes used — Par ${par} 🎯 Under par!`;
+      parEl.className = "win-par under-par";
+    } else {
+      parEl.textContent = `${state.pipesUsed} pipes used — Par ${par} (+${diff})`;
+      parEl.className = "win-par over-par";
+    }
+  } else {
+    parEl.textContent = `${state.pipesUsed} pipes used`;
+    parEl.className = "win-par";
+  }
+
+  // Random water fact
+  const factEl = $("#win-fact");
+  factEl.textContent =
+    WATER_FACTS[Math.floor(Math.random() * WATER_FACTS.length)];
+
+  sfxWin();
   spawnConfetti();
   showScreen("win");
 }
 
 function handleLose() {
   state.gameActive = false;
+  sfxLose();
+
+  if (gameMode === "endless") {
+    // Save endless best
+    if (
+      endlessFloor > saveData.endlessBest.floors ||
+      (endlessFloor === saveData.endlessBest.floors &&
+        endlessTotalCoins + state.coinsCollected > saveData.endlessBest.coins)
+    ) {
+      saveData.endlessBest = {
+        floors: endlessFloor,
+        coins: endlessTotalCoins + state.coinsCollected,
+      };
+      writeSave(saveData);
+    }
+
+    $("#endless-floors").textContent = endlessFloor;
+    $("#endless-coins").textContent = endlessTotalCoins + state.coinsCollected;
+    showScreen("endlessOver");
+    return;
+  }
+
   showScreen("lose");
 }
 
@@ -607,6 +720,100 @@ function spawnConfetti() {
     piece.style.animationDelay = `${Math.random() * 0.6}s`;
     container.appendChild(piece);
   }
+}
+
+// ----- Sound Effects (Web Audio API) -----
+let audioCtx = null;
+
+function getAudioCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  return audioCtx;
+}
+
+function playTone(freq, duration, type = "square", volume = 0.15) {
+  try {
+    const ctx = getAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = type;
+    osc.frequency.value = freq;
+    gain.gain.value = volume;
+    gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    osc.start();
+    osc.stop(ctx.currentTime + duration);
+  } catch {
+    // Audio unavailable
+  }
+}
+
+function sfxMove() {
+  playTone(220, 0.08, "square", 0.08);
+}
+
+function sfxCoin() {
+  playTone(660, 0.1, "sine", 0.15);
+  setTimeout(() => playTone(880, 0.15, "sine", 0.12), 80);
+}
+
+function sfxRockBreak() {
+  playTone(120, 0.15, "sawtooth", 0.12);
+  setTimeout(() => playTone(80, 0.2, "sawtooth", 0.08), 100);
+}
+
+function sfxBlocked() {
+  playTone(100, 0.12, "square", 0.1);
+}
+
+function sfxWin() {
+  [523, 659, 784, 1047].forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.25, "sine", 0.12), i * 120);
+  });
+}
+
+function sfxLose() {
+  [300, 250, 200, 150].forEach((f, i) => {
+    setTimeout(() => playTone(f, 0.3, "sawtooth", 0.08), i * 150);
+  });
+}
+
+function sfxBuy() {
+  playTone(440, 0.1, "sine", 0.12);
+  setTimeout(() => playTone(660, 0.15, "sine", 0.1), 80);
+}
+
+// ----- Tutorial -----
+function showTutorial() {
+  const overlay = $("#tutorial-overlay");
+  if (overlay) overlay.classList.remove("hidden");
+}
+
+function hideTutorial() {
+  const overlay = $("#tutorial-overlay");
+  if (overlay) overlay.classList.add("hidden");
+}
+
+function checkTutorial() {
+  if (
+    gameMode === "story" &&
+    state.levelIndex === 0 &&
+    !saveData.tutorialSeen
+  ) {
+    showTutorial();
+  } else {
+    hideTutorial();
+  }
+}
+
+function dismissTutorial() {
+  if (!saveData.tutorialSeen) {
+    saveData.tutorialSeen = true;
+    writeSave(saveData);
+  }
+  hideTutorial();
 }
 
 // ----- Shop Logic -----
@@ -636,6 +843,8 @@ function buyItem(itemName) {
       state.pipesLeft += 5;
     }
 
+    sfxBuy();
+
     if (card) {
       card.classList.remove("shop-pop");
       void card.offsetWidth;
@@ -643,7 +852,7 @@ function buyItem(itemName) {
     }
 
     hudPipes.textContent = `Pipes Left: ${state.pipesLeft}`;
-    hudCoins.textContent = `Coins: ${state.coins}`;
+    hudCoins.textContent = `Cans: ${state.coins}`;
     drillCount.textContent = state.inventory.drill;
   } else {
     if (card) {
@@ -656,24 +865,38 @@ function buyItem(itemName) {
 
 // ----- Game Flow -----
 function startLevel(levelIndex) {
+  gameMode = "story";
   state = createInitialState(levelIndex);
   state.gameActive = true;
+  $("#btn-reset").style.display = "";
+  showScreen("game");
+  render();
+  checkTutorial();
+}
+
+function startEndless() {
+  gameMode = "endless";
+  endlessFloor = 0;
+  endlessTotalCoins = 0;
+  state = createEndlessState(0);
+  state.gameActive = true;
+  $("#btn-reset").style.display = "none";
   showScreen("game");
   render();
 }
 
 function goHome() {
   state.gameActive = false;
-  // Save coins/inventory when leaving mid-game
-  saveData.totalCoins = state.coins;
-  saveData.inventory = { ...state.inventory };
-  writeSave(saveData);
   showScreen("start");
 }
 
 function resetLevel() {
-  const lvl = state.levelIndex;
-  state = createInitialState(lvl);
+  if (gameMode === "endless") {
+    state = createEndlessState(endlessFloor);
+  } else {
+    const lvl = state.levelIndex;
+    state = createInitialState(lvl);
+  }
   state.gameActive = true;
   showScreen("game");
   render();
@@ -682,12 +905,6 @@ function resetLevel() {
 function nextLevel() {
   const nextIdx = state.levelIndex + 1;
   const lvl = nextIdx >= LEVEL_MAPS.length ? 0 : nextIdx;
-
-  // Carry over coins and inventory
-  saveData.totalCoins = state.coins;
-  saveData.inventory = { ...state.inventory };
-  writeSave(saveData);
-
   startLevel(lvl);
 }
 
@@ -739,9 +956,11 @@ boardEl.addEventListener("click", handleBoardClick);
 
 // Start — continue from highest unlocked level
 $("#btn-start").addEventListener("click", () => {
-  const lvl = saveData.unlockedLevel;
-  startLevel(lvl);
+  startLevel(saveData.unlockedLevel);
 });
+
+// Endless mode
+$("#btn-endless").addEventListener("click", startEndless);
 
 // Level select
 $("#btn-levels").addEventListener("click", () => {
@@ -769,14 +988,20 @@ $$(".btn-buy").forEach((btn) => {
 // Reset
 $("#btn-reset").addEventListener("click", resetLevel);
 
-// Win screen
+// Win screen (story mode)
 $("#btn-next-level").addEventListener("click", nextLevel);
 $("#btn-replay").addEventListener("click", replaySameLevel);
 
-// Lose screen
+// Lose screen (story mode)
 $("#btn-restart").addEventListener("click", resetLevel);
 $("#btn-lose-shop").addEventListener("click", () => {
   showScreen("shop");
+});
+
+// Endless game over
+$("#btn-endless-retry").addEventListener("click", startEndless);
+$("#btn-endless-home").addEventListener("click", () => {
+  showScreen("start");
 });
 
 // Settings
@@ -786,7 +1011,6 @@ $("#btn-settings-open").addEventListener("click", () => {
 });
 
 $("#btn-settings-close").addEventListener("click", () => {
-  // Save name
   const name = $("#settings-name").value.trim();
   saveData.playerName = name || "Pioneer";
   writeSave(saveData);
@@ -800,9 +1024,7 @@ $("#settings-hints").addEventListener("click", () => {
 });
 
 $("#btn-reset-progress").addEventListener("click", () => {
-  if (
-    confirm("This will erase all progress, coins, and best runs. Continue?")
-  ) {
+  if (confirm("This will erase all progress, cans, and best runs. Continue?")) {
     saveData = resetSave();
     renderSettings();
   }
@@ -817,3 +1039,9 @@ $("#btn-leaderboard-open").addEventListener("click", () => {
 $("#btn-leaderboard-close").addEventListener("click", () => {
   showScreen("start");
 });
+
+// ----- Bootstrap -----
+(async () => {
+  await loadLevels();
+  state = createInitialState(0);
+})();
